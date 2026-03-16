@@ -1,0 +1,7 @@
+ccxt
+pandas
+numpy
+websocket-client
+python-telegram-handler
+python-telegram-bot
+multidict<5.0,>=4.5
