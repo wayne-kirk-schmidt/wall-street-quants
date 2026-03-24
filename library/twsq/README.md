@@ -1,1 +1,0 @@
-TWSQ quantitative trading library
