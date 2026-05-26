@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wall Street Quants -- Crypto Statistical Arbitrage</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: #0d1117;
+            color: #c9d1d9;
+            line-height: 1.6;
+            padding: 2rem;
+        }
+
+        .container { max-width: 860px; margin: 0 auto; }
+
+        header {
+            border-bottom: 1px solid #21262d;
+            padding-bottom: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #f0f6fc;
+            margin-bottom: 0.4rem;
+        }
+
+        header p {
+            color: #8b949e;
+            font-size: 0.95rem;
+        }
+
+        header a { color: #58a6ff; text-decoration: none; }
+        header a:hover { text-decoration: underline; }
+
+        .tagline {
+            background: #161b22;
+            border: 1px solid #21262d;
+            border-left: 3px solid #58a6ff;
+            border-radius: 6px;
+            padding: 1rem 1.2rem;
+            margin-bottom: 2rem;
+            font-style: italic;
+            color: #8b949e;
+        }
+
+        .tagline strong { color: #c9d1d9; font-style: normal; }
+
+        h2 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #f0f6fc;
+            margin: 2rem 0 1rem;
+            padding-bottom: 0.4rem;
+            border-bottom: 1px solid #21262d;
+        }
+
+        .pipeline {
+            display: grid;
+            gap: 0.5rem;
+        }
+
+        .notebook {
+            display: flex;
+            align-items: center;
+            background: #161b22;
+            border: 1px solid #21262d;
+            border-radius: 6px;
+            padding: 0.85rem 1rem;
+            transition: border-color 0.15s;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .notebook:hover { border-color: #58a6ff; }
+
+        .stage {
+            background: #21262d;
+            color: #8b949e;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            min-width: 52px;
+            text-align: center;
+            margin-right: 1rem;
+            font-family: monospace;
+        }
+
+        .notebook-info { flex: 1; }
+        .notebook-title { color: #58a6ff; font-weight: 500; font-size: 0.95rem; }
+        .notebook-desc { color: #8b949e; font-size: 0.82rem; margin-top: 0.15rem; }
+
+        .badge {
+            font-size: 0.72rem;
+            padding: 0.15rem 0.5rem;
+            border-radius: 10px;
+            margin-left: 0.5rem;
+            font-weight: 600;
+        }
+        .badge-start { background: #1f6feb33; color: #58a6ff; border: 1px solid #1f6feb; }
+        .badge-end   { background: #3d1f6d33; color: #a371f7; border: 1px solid #6e40c9; }
+        .badge-core  { background: #1a472a33; color: #3fb950; border: 1px solid #238636; }
+
+        .results {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .metric {
+            background: #161b22;
+            border: 1px solid #21262d;
+            border-radius: 6px;
+            padding: 0.85rem 1rem;
+        }
+
+        .metric-label { font-size: 0.78rem; color: #8b949e; margin-bottom: 0.25rem; }
+        .metric-value { font-size: 1.3rem; font-weight: 600; color: #3fb950; font-family: monospace; }
+        .metric-value.warning { color: #d29922; }
+        .metric-value.info { color: #58a6ff; }
+
+        .signals {
+            display: grid;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .signal {
+            background: #161b22;
+            border: 1px solid #21262d;
+            border-radius: 6px;
+            padding: 0.75rem 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .signal-name { font-size: 0.88rem; color: #c9d1d9; }
+        .signal-stats { display: flex; gap: 1rem; }
+        .signal-stat { text-align: right; }
+        .signal-stat-label { font-size: 0.7rem; color: #8b949e; }
+        .signal-stat-value { font-size: 0.9rem; font-weight: 600; color: #3fb950; font-family: monospace; }
+
+        .dragon-box {
+            background: #1a0a2e;
+            border: 1px solid #6e40c9;
+            border-radius: 6px;
+            padding: 0.85rem 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.88rem;
+            color: #8b949e;
+        }
+
+        .dragon-box strong { color: #a371f7; }
+
+        footer {
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #21262d;
+            font-size: 0.82rem;
+            color: #8b949e;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        footer a { color: #58a6ff; text-decoration: none; }
+        footer a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <header>
+        <h1>Wall Street Quants</h1>
+        <p>Crypto Statistical Arbitrage -- Wayne Kirk Schmidt &middot;
+           <a href="mailto:wayne.kirk.schmidt@gmail.com">wayne.kirk.schmidt@gmail.com</a> &middot;
+           <a href="https://github.com/wayne-kirk-schmidt/wall-street-quants">GitHub</a>
+        </p>
+    </header>
+
+    <div class="tagline">
+        <strong>Central finding:</strong> Market regime is the primary determinant of signal validity.
+        A strategy that works in a bull market fails in a bear market, and vice versa.
+        The framework -- not just the signals -- is the durable contribution.
+    </div>
+
+    <h2>Research Pipeline</h2>
+    <div class="pipeline">
+
+        <a class="notebook" href="000_overview.html">
+            <span class="stage">000</span>
+            <div class="notebook-info">
+                <div class="notebook-title">Overview <span class="badge badge-start">Start here</span></div>
+                <div class="notebook-desc">Structure, hypothesis, and pipeline map -- the voyage we planned</div>
+            </div>
+        </a>
+
+        <a class="notebook" href="001_download.html">
+            <span class="stage">001</span>
+            <div class="notebook-info">
+                <div class="notebook-title">Data Acquisition</div>
+                <div class="notebook-desc">Binance OHLCV for 9 crypto pairs -- BTC, ETH, SOL, BNB, ADA, AVAX, XRP, DOGE, LTC</div>
+            </div>
+        </a>
+
+        <a class="notebook" href="002_enrich.html">
+            <span class="stage">002</span>
+            <div class="notebook-info">
+                <div class="notebook-title">Data Enrichment</div>
+                <div class="notebook-desc">Returns, rolling volatility, z-score normalization</div>
+            </div>
+        </a>
+
+        <a class="notebook" href="003_analysis.html">
+            <span class="stage">003</span>
+            <div class="notebook-info">
+                <div class="notebook-title">Shock Analysis</div>
+                <div class="notebook-desc">Shock detection, sigma thresholds, cross-asset event bitmap</div>
+            </div>
+        </a>
+
+        <a class="notebook" href="003a_regime_classification.html">
+            <span class="stage">003a</span>
+            <div class="notebook-info">
+                <div class="notebook-title">Regime Classification <span class="badge badge-core">Core contribution</span></div>
+                <div class="notebook-desc">Bull/Bear/Transition/Dragon segmentation, ADSR characterization, tradability filter</div>
+            </div>
+        </a>
+
+        <a class="notebook" href="004_strategy.html">
+            <span class="stage">004</span>
+            <div class="notebook-info">
+                <div class="notebook-title">Strategy Construction</div>
+                <div class="notebook-desc">Conditioned lead-lag signal construction and trade mapping</div>
+            </div>
+        </a>
+
+        <a class="notebook" href="005_backtest.html">
+            <span class="stage">005</span>
+            <div class="notebook-info">
+                <div class="notebook-title">Backtest and Validation</div>
+                <div class="notebook-desc">Stress grid, t-test, Lo 2002 Sharpe CI, walk-forward robustness</div>
+            </div>
+        </a>
+
+        <a class="notebook" href="006_writeup.html">
+            <span class="stage">006</span>
+            <div class="notebook-info">
+                <div class="notebook-title">Research Writeup <span class="badge badge-end">End here</span></div>
+                <div class="notebook-desc">The full story -- what we planned, what we found, what we got wrong. Call me Ishmael.</div>
+            </div>
+        </a>
+
+    </div>
+
+    <h2>Primary Strategy Results</h2>
+    <div class="results">
+        <div class="metric">
+            <div class="metric-label">Sharpe Ratio (t+0, 20bps)</div>
+            <div class="metric-value">3.325</div>
+        </div>
+        <div class="metric">
+            <div class="metric-label">Sharpe 95% CI (Lo 2002)</div>
+            <div class="metric-value info">[2.73, 3.93]</div>
+        </div>
+        <div class="metric">
+            <div class="metric-label">p-value (t-test)</div>
+            <div class="metric-value">0.0091</div>
+        </div>
+        <div class="metric">
+            <div class="metric-label">Walk-forward Fold 1</div>
+            <div class="metric-value">4.26</div>
+        </div>
+        <div class="metric">
+            <div class="metric-label">Walk-forward Fold 2</div>
+            <div class="metric-value">3.85</div>
+        </div>
+        <div class="metric">
+            <div class="metric-label">Walk-forward Fold 3</div>
+            <div class="metric-value warning">1.75</div>
+        </div>
+    </div>
+    <p style="font-size:0.82rem; color:#8b949e; margin-bottom:1rem;">
+        Requires t+0 execution -- institutional direct market access. Collapses at t+1.
+        Walk-forward decay consistent with progressive arbitrage by institutional participants.
+    </p>
+
+    <h2>Regime-Specific Signals (Tradability Filter)</h2>
+    <div class="signals">
+        <div class="signal">
+            <div class="signal-name">ADA/XRP shock -- BEAR/DRAGON regime, buy t+1, sell t+5</div>
+            <div class="signal-stats">
+                <div class="signal-stat">
+                    <div class="signal-stat-label">Mean</div>
+                    <div class="signal-stat-value">+5.17%</div>
+                </div>
+                <div class="signal-stat">
+                    <div class="signal-stat-label">Win rate</div>
+                    <div class="signal-stat-value">92%</div>
+                </div>
+                <div class="signal-stat">
+                    <div class="signal-stat-label">p-value</div>
+                    <div class="signal-stat-value">0.001</div>
+                </div>
+            </div>
+        </div>
+        <div class="signal">
+            <div class="signal-name">ADA/XRP shock -- BEAR/DRAGON regime, buy t+1, sell t+10</div>
+            <div class="signal-stats">
+                <div class="signal-stat">
+                    <div class="signal-stat-label">Mean</div>
+                    <div class="signal-stat-value">+6.13%</div>
+                </div>
+                <div class="signal-stat">
+                    <div class="signal-stat-label">Win rate</div>
+                    <div class="signal-stat-value">92%</div>
+                </div>
+                <div class="signal-stat">
+                    <div class="signal-stat-label">p-value</div>
+                    <div class="signal-stat-value">0.005</div>
+                </div>
+            </div>
+        </div>
+        <div class="signal">
+            <div class="signal-name">All-coin panic recovery -- any regime, buy t+1, sell t+5</div>
+            <div class="signal-stats">
+                <div class="signal-stat">
+                    <div class="signal-stat-label">Mean</div>
+                    <div class="signal-stat-value">+2.58%</div>
+                </div>
+                <div class="signal-stat">
+                    <div class="signal-stat-label">Win rate</div>
+                    <div class="signal-stat-value">62%</div>
+                </div>
+                <div class="signal-stat">
+                    <div class="signal-stat-label">p-value</div>
+                    <div class="signal-stat-value">0.004</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="dragon-box">
+        <strong>Here Be Dragons:</strong> Five major multi-coin simultaneous shock events were
+        identified and explicitly excluded from systematic strategies. They are documented,
+        characterized, and set aside. Some things cannot be systematically modeled on five observations.
+    </div>
+
+    <h2>Regime Classification</h2>
+    <div class="results">
+        <div class="metric">
+            <div class="metric-label">BULL (BTC 60d &gt; +10%)</div>
+            <div class="metric-value info">39.5%</div>
+        </div>
+        <div class="metric">
+            <div class="metric-label">BEAR (BTC 60d &lt; -15%)</div>
+            <div class="metric-value warning">11.8%</div>
+        </div>
+        <div class="metric">
+            <div class="metric-label">TRANSITION</div>
+            <div class="metric-value" style="color:#8b949e">43.4%</div>
+        </div>
+        <div class="metric">
+            <div class="metric-label">DRAGON events</div>
+            <div class="metric-value" style="color:#a371f7">5</div>
+        </div>
+    </div>
+
+    <footer>
+        <span>Wayne Kirk Schmidt &middot; wayne.kirk.schmidt@gmail.com &middot; Apache 2.0</span>
+        <span>
+            <a href="https://github.com/wayne-kirk-schmidt/wall-street-quants">GitHub</a>
+            &middot;
+            <a href="006_writeup.html">Read the full writeup</a>
+        </span>
+    </footer>
+
+</div>
+</body>
+</html>
