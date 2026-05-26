@@ -1,188 +1,121 @@
+# Wall Street Quants -- Crypto Statistical Arbitrage
 
-# Wall Street Quants — Quant Research Workspace
-
-This repository contains coursework, research notebooks, and generated artifacts from the **Wall Street Quants quantitative trading bootcamp**.
-
-The repository is organized around three primary areas:
-
-1. **Homework** – structured exercises used to build quantitative research skills  
-2. **Project** – applied research and strategy development  
-3. **Output** – generated artifacts produced by the research pipeline  
-
-The workflow of the repository follows a simple model:
-
-Learning → Research → Strategy → Results
+**Author:** Wayne Kirk Schmidt
+**Email:** wayne.kirk.schmidt@gmail.com
+**License:** Apache 2.0
 
 ---
 
-# Repository Overview
+## Overview
 
-| Area | Description | Link |
-|-----|-----|-----|
-| Homework | Bootcamp exercises and solutions | [homework/](./homework/) |
-| Project Notebooks | Main research pipeline | [project/Stat_Arb_Notebook/](./project/Stat_Arb_Notebook/) |
-| Output Artifacts | Generated datasets and signals | [project/Stat_Arb_Notebook/output/](./project/Stat_Arb_Notebook/output/) |
+This repository contains a full quantitative research pipeline investigating
+leader-follower dynamics and regime-aware signal discovery in cryptocurrency markets.
 
----
-
-# 1. Homework
-
-The **homework directory** contains the completed exercises from the bootcamp.
-
-These notebooks cover the core quantitative research stack:
-
-- Python fundamentals
-- NumPy
-- Pandas
-- financial time series
-- regression analysis
-- drawdown calculations
-- portfolio weights
-
-Directory:
-
-```
-homework/
-```
-
-Examples:
-
-- [Homework1_Solutions.ipynb](./homework/Homework1_Solutions.ipynb)
-- [Homework2_Solutions.ipynb](./homework/Homework2_Solutions.ipynb)
-- [Homework3_Solutions.ipynb](./homework/Homework3_Solutions.ipynb)
-- [Homework4_Solutions.ipynb](./homework/Homework4_Solutions.ipynb)
-
-Archived bootcamp materials are also available in:
-
-```
-archives/
-```
+The central finding: **market regime is the primary determinant of signal validity.**
+A strategy that works in a bull market fails in a bear market, and vice versa.
+The framework -- not just the signals -- is the durable contribution.
 
 ---
 
-# 2. Project — Crypto Statistical Arbitrage
+## Research Pipeline
 
-The main research work lives in:
-
-```
-project/Stat_Arb_Notebook/
-```
-
-Project entry point:
-
-- [000_overview.ipynb](./project/Stat_Arb_Notebook/000_overview.ipynb)
-
-Research notebooks:
-
-| Stage | Notebook |
-|------|------|
-| Data download | [001_download.ipynb](./project/Stat_Arb_Notebook/notebooks/001_download.ipynb) |
-| Feature enrichment | [002_enrich.ipynb](./project/Stat_Arb_Notebook/notebooks/002_enrich.ipynb) |
-| Event analysis | [003_analysis.ipynb](./project/Stat_Arb_Notebook/notebooks/003_analysis.ipynb) |
-| Strategy construction | [004_strategy.ipynb](./project/Stat_Arb_Notebook/notebooks/004_strategy.ipynb) |
-| Backtesting | [005_backtest.ipynb](./project/Stat_Arb_Notebook/notebooks/005_backtest.ipynb) |
-| Write‑up | [006_writeup.ipynb](./project/Stat_Arb_Notebook/006_writeup.ipynb) |
-
-The pipeline creates a **deterministic research DAG** where each stage reads artifacts from the previous stage.
+| Stage | Notebook | Description |
+|-------|----------|-------------|
+| 000 | project/000_overview.ipynb | Structure, hypothesis, and pipeline map |
+| 001 | project/notebooks/001_download.ipynb | Data acquisition -- Binance OHLCV, 9 crypto pairs |
+| 002 | project/notebooks/002_enrich.ipynb | Feature engineering -- returns, volatility, z-scores |
+| 003 | project/notebooks/003_analysis.ipynb | Shock detection and cross-asset structure |
+| 003a | project/notebooks/003a_regime_classification.ipynb | Regime segmentation, ADSR characterization, tradability filter |
+| 004 | project/notebooks/004_strategy.ipynb | Signal construction and trade mapping |
+| 005 | project/notebooks/005_backtest.ipynb | Backtesting, stress testing, statistical validation |
+| 006 | project/006_writeup.ipynb | Final research writeup -- the full story |
 
 ---
 
-# 3. Output Artifacts
+## Key Results
 
-Generated research artifacts are stored in:
+### Primary Strategy (Stage 004/005)
 
-```
-project/Stat_Arb_Notebook/output/
-```
+Conditioned lead-lag signal requiring t+0 institutional execution:
 
-Primary dataset outputs:
+| Metric | Value |
+|--------|-------|
+| t-statistic | 2.641 |
+| p-value | 0.0091 |
+| Sharpe (t+0, 20bps) | 3.325 |
+| Sharpe 95% CI (Lo 2002) | [2.725, 3.925] |
+| Walk-forward fold 1 | 4.26 |
+| Walk-forward fold 2 | 3.85 |
+| Walk-forward fold 3 | 1.75 |
 
-- [001_download/](./project/Stat_Arb_Notebook/output/001_download/)
+**Note:** requires same-session execution (t+0). Collapses at t+1.
+Designed for institutional participants with direct market access.
 
-Example files:
+### Regime-Specific Signals (Stage 003a)
 
-```
-BTCUSDT.event_panel.pkl
-ETHUSDT.event_panel.pkl
-SOLUSDT.event_panel.pkl
-BNBUSDT.event_panel.pkl
-```
+Three signals passed the formal tradability filter:
 
-These files contain synchronized price panels and event datasets used in the strategy research.
+| Signal | n | Mean | Win% | p-value |
+|--------|---|------|------|---------|
+| ADA/XRP shock -- BEAR/DRAGON regime, t+1 to t+5 | 13 | +5.17% | 92% | 0.001 |
+| ADA/XRP shock -- BEAR/DRAGON regime, t+1 to t+10 | 13 | +6.13% | 92% | 0.005 |
+| All-coin panic recovery | 53 | +2.58% | 62% | 0.004 |
 
-Artifacts are treated as **immutable outputs** of the research pipeline.
+### Dragon Events (Here Be Dragons)
 
----
-
-# Supporting Material
-
-Additional supporting materials can be found in:
-
-| Directory | Description |
-|------|------|
-| [examples/](./examples/) | Python and data analysis examples |
-| [docs/](./docs/) | Bootcamp documentation and setup guides |
-| [archives/](./archives/) | Archived bootcamp notebooks and datasets |
+Five major multi-coin simultaneous shocks identified and documented.
+Excluded from systematic strategies. See Stage 003a for full documentation.
 
 ---
 
-# Research Focus
+## Regime Classification
 
-The active project explores **leader‑follower dynamics in crypto markets**, focusing on:
-
-- volatility shocks
-- cross‑asset propagation
-- lag structure
-- statistical arbitrage opportunities
-
-The strategy hypothesis:
-
-> Large volatility shocks in one crypto asset propagate to others with a measurable lag structure that may be exploited by systematic trading.
+| Regime | Condition | Days | Frequency |
+|--------|-----------|------|-----------|
+| BULL | BTC 60d return > +10% | 491 | 39.5% |
+| BEAR | BTC 60d return < -15% | 147 | 11.8% |
+| TRANSITION | Between thresholds | 539 | 43.4% |
+| DRAGON | 8+ coins shocked simultaneously | 5 | 0.4% |
 
 ---
 
-# Future Improvements
+## How to Run
 
-Planned improvements include:
+### Requirements
 
-- full directory tree visualization
-- research pipeline DAG diagram
-- strategy performance summary
-- experiment registry
-- implement Cirkus, a library of strategies built by a "Gang of Agents"
-- implement podman or k8s/k3s deployment of Cirkus in action
+```bash
+pip install pandas numpy scipy matplotlib python-binance
+```
 
-## Design Principles
+### Execution Order
 
-- **KISS** – Keep it Simple and Speedy
-- **Deterministic** – the output is based on the same notebook
+Run notebooks in sequence from the project/notebooks/ directory:
 
+```
+001_download -> 002_enrich -> 003_analysis -> 003a_regime_classification
+             -> 004_strategy -> 005_backtest
+```
 
-License
-=======
+Then open project/006_writeup.ipynb for the full research narrative.
 
-Copyright 2026 
+**Note:** Each stage reads from the previous stage's output/ artifacts.
+Delete output/ and rerun from 001 for a fully clean rebuild.
 
-* Wayne Kirk Schmidt (wayne.kirk.schmidt@gmail.com)
+---
 
-Licensed under the Apache 2.0 License (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
+## Research Honesty
 
-    license-name   Apache 2.0 
-    license-url    https://www.apache.org/licenses/LICENSE-2.0
+This pipeline was rebuilt approximately five times. The research journal in
+006_writeup.ipynb documents every iteration -- what was wrong, what was fixed,
+and what was learned. Negative results and anti-patterns are documented alongside
+positive findings.
 
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
+See FINDINGS.md for a complete catalogue of all signals tested, passed, and rejected.
 
-Support
-=======
+---
 
-Feel free to e-mail me with issues to: 
+## License
 
-+   wayne.kirk.schmidt@gmail.com
+Copyright 2026 Wayne Kirk Schmidt
 
-I will provide "best effort" fixes and extend the scripts.
+Licensed under the Apache 2.0 License.
