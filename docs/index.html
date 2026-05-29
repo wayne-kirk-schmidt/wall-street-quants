@@ -60,10 +60,51 @@
             border-bottom: 1px solid #21262d;
         }
 
-        .pipeline {
-            display: grid;
-            gap: 0.5rem;
+        /* Primary paper download */
+        .paper-download {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #161b22;
+            border: 1px solid #238636;
+            border-radius: 6px;
+            padding: 1rem 1.2rem;
+            margin-bottom: 2rem;
+            gap: 1rem;
         }
+
+        .paper-download-info h3 {
+            color: #3fb950;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+        }
+
+        .paper-download-info p {
+            color: #8b949e;
+            font-size: 0.82rem;
+        }
+
+        .btn-download {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.55rem 1.2rem;
+            background: #238636;
+            border: 1px solid #2ea043;
+            border-radius: 6px;
+            color: #fff;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-decoration: none;
+            white-space: nowrap;
+            transition: background 0.15s;
+        }
+
+        .btn-download:hover { background: #2ea043; }
+
+        /* Pipeline */
+        .pipeline { display: grid; gap: 0.5rem; }
 
         .notebook {
             display: flex;
@@ -71,13 +112,12 @@
             background: #161b22;
             border: 1px solid #21262d;
             border-radius: 6px;
-            padding: 0.85rem 1rem;
+            padding: 0.75rem 1rem;
             transition: border-color 0.15s;
-            text-decoration: none;
-            color: inherit;
+            gap: 0.75rem;
         }
 
-        .notebook:hover { border-color: #58a6ff; }
+        .notebook:hover { border-color: #30363d; }
 
         .stage {
             background: #21262d;
@@ -88,28 +128,86 @@
             border-radius: 4px;
             min-width: 52px;
             text-align: center;
-            margin-right: 1rem;
             font-family: monospace;
+            flex-shrink: 0;
         }
 
-        .notebook-info { flex: 1; }
-        .notebook-title { color: #58a6ff; font-weight: 500; font-size: 0.95rem; }
-        .notebook-desc { color: #8b949e; font-size: 0.82rem; margin-top: 0.15rem; }
+        .notebook-info { flex: 1; min-width: 0; }
+
+        .notebook-title-row {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.15rem;
+        }
+
+        .notebook-title {
+            color: #f0f6fc;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .notebook-desc {
+            color: #8b949e;
+            font-size: 0.8rem;
+        }
 
         .badge {
-            font-size: 0.72rem;
-            padding: 0.15rem 0.5rem;
+            font-size: 0.7rem;
+            padding: 0.1rem 0.45rem;
             border-radius: 10px;
-            margin-left: 0.5rem;
             font-weight: 600;
+            white-space: nowrap;
         }
+
         .badge-start { background: #1f6feb33; color: #58a6ff; border: 1px solid #1f6feb; }
         .badge-end   { background: #3d1f6d33; color: #a371f7; border: 1px solid #6e40c9; }
         .badge-core  { background: #1a472a33; color: #3fb950; border: 1px solid #238636; }
 
+        .notebook-actions {
+            display: flex;
+            gap: 0.4rem;
+            flex-shrink: 0;
+        }
+
+        .btn-read {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            padding: 0.35rem 0.75rem;
+            background: #1f6feb;
+            border: 1px solid #1f6feb;
+            border-radius: 5px;
+            color: #fff;
+            font-size: 0.78rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: background 0.15s;
+        }
+
+        .btn-read:hover { background: #388bfd; border-color: #388bfd; }
+
+        .btn-pdf {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            padding: 0.35rem 0.75rem;
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 5px;
+            color: #8b949e;
+            font-size: 0.78rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: border-color 0.15s, color 0.15s;
+        }
+
+        .btn-pdf:hover { border-color: #3fb950; color: #3fb950; }
+
+        /* Results */
         .results {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
             gap: 0.75rem;
             margin-bottom: 1rem;
         }
@@ -126,11 +224,7 @@
         .metric-value.warning { color: #d29922; }
         .metric-value.info { color: #58a6ff; }
 
-        .signals {
-            display: grid;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-        }
+        .signals { display: grid; gap: 0.5rem; margin-bottom: 1rem; }
 
         .signal {
             background: #161b22;
@@ -140,13 +234,14 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
+            gap: 1rem;
         }
 
-        .signal-name { font-size: 0.88rem; color: #c9d1d9; }
-        .signal-stats { display: flex; gap: 1rem; }
+        .signal-name { font-size: 0.85rem; color: #c9d1d9; }
+        .signal-stats { display: flex; gap: 1rem; flex-shrink: 0; }
         .signal-stat { text-align: right; }
         .signal-stat-label { font-size: 0.7rem; color: #8b949e; }
-        .signal-stat-value { font-size: 0.9rem; font-weight: 600; color: #3fb950; font-family: monospace; }
+        .signal-stat-value { font-size: 0.88rem; font-weight: 600; color: #3fb950; font-family: monospace; }
 
         .dragon-box {
             background: #1a0a2e;
@@ -154,7 +249,7 @@
             border-radius: 6px;
             padding: 0.85rem 1rem;
             margin-bottom: 1rem;
-            font-size: 0.88rem;
+            font-size: 0.85rem;
             color: #8b949e;
         }
 
@@ -181,7 +276,7 @@
 
     <header>
         <h1>Wall Street Quants</h1>
-        <p>Crypto Statistical Arbitrage -- Wayne Kirk Schmidt &middot;
+        <p>Crypto Statistical Arbitrage &middot; Wayne Kirk Schmidt &middot;
            <a href="mailto:wayne.kirk.schmidt@gmail.com">wayne.kirk.schmidt@gmail.com</a> &middot;
            <a href="https://github.com/wayne-kirk-schmidt/wall-street-quants">GitHub</a>
         </p>
@@ -193,72 +288,134 @@
         The framework -- not just the signals -- is the durable contribution.
     </div>
 
+    <!-- Primary paper download -->
+    <div class="paper-download">
+        <div class="paper-download-info">
+            <h3>Research Writeup</h3>
+            <p>The full story -- what we planned, what we found, what we got wrong. Call me Ishmael.</p>
+        </div>
+        <a href="006_writeup.pdf" class="btn-download" download>
+            &darr; Download PDF
+        </a>
+    </div>
+
     <h2>Research Pipeline</h2>
     <div class="pipeline">
 
-        <a class="notebook" href="000_overview.html">
+        <div class="notebook">
             <span class="stage">000</span>
             <div class="notebook-info">
-                <div class="notebook-title">Overview <span class="badge badge-start">Start here</span></div>
+                <div class="notebook-title-row">
+                    <span class="notebook-title">Overview</span>
+                    <span class="badge badge-start">Start here</span>
+                </div>
                 <div class="notebook-desc">Structure, hypothesis, and pipeline map -- the voyage we planned</div>
             </div>
-        </a>
+            <div class="notebook-actions">
+                <a href="view_000_overview.html" class="btn-read">Read</a>
+                <a href="000_overview.pdf" class="btn-pdf" download>&darr; PDF</a>
+            </div>
+        </div>
 
-        <a class="notebook" href="001_download.html">
+        <div class="notebook">
             <span class="stage">001</span>
             <div class="notebook-info">
-                <div class="notebook-title">Data Acquisition</div>
+                <div class="notebook-title-row">
+                    <span class="notebook-title">Data Acquisition</span>
+                </div>
                 <div class="notebook-desc">Binance OHLCV for 9 crypto pairs -- BTC, ETH, SOL, BNB, ADA, AVAX, XRP, DOGE, LTC</div>
             </div>
-        </a>
+            <div class="notebook-actions">
+                <a href="view_001_download.html" class="btn-read">Read</a>
+                <a href="001_download.pdf" class="btn-pdf" download>&darr; PDF</a>
+            </div>
+        </div>
 
-        <a class="notebook" href="002_enrich.html">
+        <div class="notebook">
             <span class="stage">002</span>
             <div class="notebook-info">
-                <div class="notebook-title">Data Enrichment</div>
+                <div class="notebook-title-row">
+                    <span class="notebook-title">Data Enrichment</span>
+                </div>
                 <div class="notebook-desc">Returns, rolling volatility, z-score normalization</div>
             </div>
-        </a>
+            <div class="notebook-actions">
+                <a href="view_002_enrich.html" class="btn-read">Read</a>
+                <a href="002_enrich.pdf" class="btn-pdf" download>&darr; PDF</a>
+            </div>
+        </div>
 
-        <a class="notebook" href="003_analysis.html">
+        <div class="notebook">
             <span class="stage">003</span>
             <div class="notebook-info">
-                <div class="notebook-title">Shock Analysis</div>
+                <div class="notebook-title-row">
+                    <span class="notebook-title">Shock Analysis</span>
+                </div>
                 <div class="notebook-desc">Shock detection, sigma thresholds, cross-asset event bitmap</div>
             </div>
-        </a>
+            <div class="notebook-actions">
+                <a href="view_003_analysis.html" class="btn-read">Read</a>
+                <a href="003_analysis.pdf" class="btn-pdf" download>&darr; PDF</a>
+            </div>
+        </div>
 
-        <a class="notebook" href="003a_regime_classification.html">
+        <div class="notebook">
             <span class="stage">003a</span>
             <div class="notebook-info">
-                <div class="notebook-title">Regime Classification <span class="badge badge-core">Core contribution</span></div>
+                <div class="notebook-title-row">
+                    <span class="notebook-title">Regime Classification</span>
+                    <span class="badge badge-core">Core contribution</span>
+                </div>
                 <div class="notebook-desc">Bull/Bear/Transition/Dragon segmentation, ADSR characterization, tradability filter</div>
             </div>
-        </a>
+            <div class="notebook-actions">
+                <a href="view_003a_regime_classification.html" class="btn-read">Read</a>
+                <a href="003a_regime_classification.pdf" class="btn-pdf" download>&darr; PDF</a>
+            </div>
+        </div>
 
-        <a class="notebook" href="004_strategy.html">
+        <div class="notebook">
             <span class="stage">004</span>
             <div class="notebook-info">
-                <div class="notebook-title">Strategy Construction</div>
+                <div class="notebook-title-row">
+                    <span class="notebook-title">Strategy Construction</span>
+                </div>
                 <div class="notebook-desc">Conditioned lead-lag signal construction and trade mapping</div>
             </div>
-        </a>
+            <div class="notebook-actions">
+                <a href="view_004_strategy.html" class="btn-read">Read</a>
+                <a href="004_strategy.pdf" class="btn-pdf" download>&darr; PDF</a>
+            </div>
+        </div>
 
-        <a class="notebook" href="005_backtest.html">
+        <div class="notebook">
             <span class="stage">005</span>
             <div class="notebook-info">
-                <div class="notebook-title">Backtest and Validation</div>
+                <div class="notebook-title-row">
+                    <span class="notebook-title">Backtest and Validation</span>
+                </div>
                 <div class="notebook-desc">Stress grid, t-test, Lo 2002 Sharpe CI, walk-forward robustness</div>
             </div>
-        </a>
+            <div class="notebook-actions">
+                <a href="view_005_backtest.html" class="btn-read">Read</a>
+                <a href="005_backtest.pdf" class="btn-pdf" download>&darr; PDF</a>
+            </div>
+        </div>
 
-        <a class="notebook" href="006_writeup.html">
+        <div class="notebook">
             <span class="stage">006</span>
             <div class="notebook-info">
-                <div class="notebook-title">Research Writeup <span class="badge badge-end">End here</span></div>
+                <div class="notebook-title-row">
+                    <span class="notebook-title">Research Writeup</span>
+                    <span class="badge badge-end">End here</span>
+                </div>
                 <div class="notebook-desc">The full story -- what we planned, what we found, what we got wrong. Call me Ishmael.</div>
             </div>
-        </a>
+            <div class="notebook-actions">
+                <a href="view_006_writeup.html" class="btn-read">Read</a>
+                <a href="006_writeup.pdf" class="btn-pdf" download>&darr; PDF</a>
+            </div>
+        </div>
 
     </div>
 
@@ -380,7 +537,9 @@
         <span>
             <a href="https://github.com/wayne-kirk-schmidt/wall-street-quants">GitHub</a>
             &middot;
-            <a href="006_writeup.html">Read the full writeup</a>
+            <a href="view_006_writeup.html">Read the full writeup</a>
+            &middot;
+            <a href="006_writeup.pdf" download>Download PDF</a>
         </span>
     </footer>
 
