@@ -3,16 +3,14 @@
 # Converts all project notebooks to HTML into the docs/ folder.
 # Run from the project root directory.
 # Uses the Python 3.13 Store installation explicitly to avoid Python 3.14 conflicts.
-
-umask 022
-
-NBCONVERT="PARENT_DIRECTORY/jupyter-nbconvert"
-
+ 
+NBCONVERT="/c/Users/wayne/AppData/Local/Packages/PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0/LocalCache/local-packages/Python313/Scripts/jupyter-nbconvert"
+ 
 echo "Wall Street Quants -- Notebook Export"
 echo "======================================"
-
+ 
 mkdir -p docs
-
+ 
 NOTEBOOKS=(
     "project/000_overview.ipynb"
     "project/notebooks/001_download.ipynb"
@@ -23,7 +21,7 @@ NOTEBOOKS=(
     "project/notebooks/005_backtest.ipynb"
     "project/006_writeup.ipynb"
 )
-
+ 
 for nb in "${NOTEBOOKS[@]}"; do
     name=$(basename "$nb" .ipynb)
     echo "Converting: $name..."
@@ -33,7 +31,7 @@ for nb in "${NOTEBOOKS[@]}"; do
     && echo "  --> docs/${name}.html" \
     || echo "  --> HTML FAILED: $name"
 done
-
+ 
 echo ""
 echo "Done. HTML files in docs/"
 echo ""
