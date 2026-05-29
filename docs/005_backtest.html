@@ -9094,7 +9094,7 @@ saved: ..\output\005_backtest\grid_results.pkl
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="16.-Statistical-Significance-Tests">16. Statistical Significance Tests<a class="anchor-link" href="#16.-Statistical-Significance-Tests">¶</a></h3><p>We test whether the observed mean return is statistically distinguishable from zero, and compute a confidence interval around the annualized Sharpe ratio.</p>
+<h3 id="16.-Statistical-Significance-Tests">16. Statistical Significance Tests<a class="anchor-link" href="#16.-Statistical-Significance-Tests">¶</a></h3><p>I test whether the observed mean return is statistically distinguishable from zero, and compute a confidence interval around the annualized Sharpe ratio.</p>
 <p><strong>16a -- One-sample t-test on daily returns (t+0, 20 bps baseline)</strong></p>
 <p>Null hypothesis: mean daily return = 0. A p-value below 0.05 provides evidence that the strategy's returns are not explained by chance.</p>
 <p><strong>16b -- Sharpe ratio confidence interval (Lo, 2002)</strong></p>
@@ -9202,8 +9202,8 @@ saved: ..\output\005_backtest\grid_results.pkl
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="17.-Walk-Forward-Robustness-Test">17. Walk-Forward Robustness Test<a class="anchor-link" href="#17.-Walk-Forward-Robustness-Test">¶</a></h3><p>A single in-sample Sharpe ratio is insufficient evidence of a persistent edge. We split the full date range into three equal, non-overlapping folds and measure performance independently in each.</p>
-<p>If the signal is real, we expect positive Sharpe in all three folds. Deterioration over time is consistent with a decaying microstructure edge -- still meaningful, but worth monitoring.</p>
+<h3 id="17.-Walk-Forward-Robustness-Test">17. Walk-Forward Robustness Test<a class="anchor-link" href="#17.-Walk-Forward-Robustness-Test">¶</a></h3><p>A single in-sample Sharpe ratio is insufficient evidence of a persistent edge. I split the full date range into three equal, non-overlapping folds and measure performance independently in each.</p>
+<p>If the signal is real, I expect positive Sharpe in all three folds. Deterioration over time is consistent with a decaying microstructure edge -- still meaningful, but worth monitoring.</p>
 <p><strong>Scenario evaluated:</strong> t+0 execution, 20 bps transaction cost.</p>
 </div>
 </div>

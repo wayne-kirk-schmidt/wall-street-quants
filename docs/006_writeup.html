@@ -7796,7 +7796,7 @@ a.anchor-link {
 <!-- End of mermaid configuration --></head>
 <body class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
 <main>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=35892fbb">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=2a3791ab">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7807,15 +7807,15 @@ a.anchor-link {
 <hr/>
 <h1 id="Leader-Follower-Shock-Propagation-in-Cryptocurrency-Markets">Leader-Follower Shock Propagation in Cryptocurrency Markets<a class="anchor-link" href="#Leader-Follower-Shock-Propagation-in-Cryptocurrency-Markets">¶</a></h1><h2 id="A-Regime-Aware-Quantitative-Research-Pipeline">A Regime-Aware Quantitative Research Pipeline<a class="anchor-link" href="#A-Regime-Aware-Quantitative-Research-Pipeline">¶</a></h2><hr/>
 <h2 id="Call-Me-Ishmael">Call Me Ishmael<a class="anchor-link" href="#Call-Me-Ishmael">¶</a></h2><p>This is the writeup of a voyage into unknown waters.</p>
-<p>We set out with a clean hypothesis, a sound methodology, and reasonable confidence
+<p>I set out with a clean hypothesis, a sound methodology, and reasonable confidence
 that the data would cooperate. The data had other ideas -- or rather, it cooperated
-in ways we did not expect, refused to cooperate in ways we did expect, and taught
-us things we did not know we needed to learn.</p>
-<p>The result is not the strategy we originally planned to find. It is something more
+in ways I did not expect, refused to cooperate in ways I expected, and taught
+me things I did not know I needed to learn.</p>
+<p>The result is not the strategy I originally planned to find. It is something more
 honest, more nuanced, and ultimately more useful: a regime-aware analytical framework
 that identifies when signals exist, when they do not, and how to tell the difference.</p>
-<p>000_overview.ipynb describes the voyage we planned. This document describes the
-voyage we actually took.</p>
+<p>000_overview.ipynb describes the voyage I planned. This document describes the
+voyage I actually took.</p>
 <hr/>
 <h2 id="What-We-Set-Out-to-Do">What We Set Out to Do<a class="anchor-link" href="#What-We-Set-Out-to-Do">¶</a></h2><p>The original hypothesis: large price shocks in one cryptocurrency propagate to
 correlated assets with a measurable lag. If that lag is consistent and predictable,
@@ -7890,8 +7890,8 @@ is trivially satisfied. For everyone else, it is not.</p>
 The edge is being progressively arbitraged as institutional participants enter
 crypto with increasingly sophisticated execution infrastructure. The signal is not
 broken -- it is compressing.</p>
-<h3 id="The-Regime-Discovery----Unexpected-and-Important">The Regime Discovery -- Unexpected and Important<a class="anchor-link" href="#The-Regime-Discovery----Unexpected-and-Important">¶</a></h3><p>When we ran the pipeline with fresh eyes, we found something more important than
-the original signal: the results depended entirely on which market regime we were in.</p>
+<h3 id="The-Regime-Discovery----Unexpected-and-Important">The Regime Discovery -- Unexpected and Important<a class="anchor-link" href="#The-Regime-Discovery----Unexpected-and-Important">¶</a></h3><p>When I ran the pipeline with fresh eyes, I found something more important than
+the original signal: the results depended entirely on which market regime I was in.</p>
 <p>A signal that worked cleanly in a bull market failed in a bear market.
 A signal that worked in a bear market was invisible in a bull market.
 Testing across mixed regimes produced misleading aggregates that obscured both.</p>
@@ -8044,8 +8044,8 @@ tend to overshoot and recover. Not always, not dramatically, but consistently
 enough to pass all four tradability filters with a solid p=0.004.</p>
 <hr/>
 <h2 id="The-ADSR-Framework">The ADSR Framework<a class="anchor-link" href="#The-ADSR-Framework">¶</a></h2><p>Each shock type has a characteristic curve shape that determines whether and when
-it is tradeable. We borrow the Attack/Sustain/Decay/Release framework from music
-synthesis -- it maps precisely to what we observe in price shocks.</p>
+it is tradeable. I borrow the Attack/Sustain/Decay/Release framework from music
+synthesis -- it maps precisely to what I observe in price shocks.</p>
 <p><strong>Tier 1 BULL regime shock (BTC/ETH/XRP):</strong></p>
 <ul>
 <li>Attack: -1.28% at t+1 (sharp drop)</li>
@@ -8131,7 +8131,7 @@ entry/exit parameters are too noisy to trade reliably.</p>
 <p>Note: BULL strategy context-only (n=4, p=0.168). BEAR/DRAGON strategy tradeable
 (n=13, p=0.001). Ongoing data accumulation will improve confidence on both.</p>
 <hr/>
-<h2 id="The-Research-Journal----What-We-Did-and-What-We-Got-Wrong">The Research Journal -- What We Did and What We Got Wrong<a class="anchor-link" href="#The-Research-Journal----What-We-Did-and-What-We-Got-Wrong">¶</a></h2><p>By our count, this pipeline was rebuilt approximately five times. Each rebuild
+<h2 id="The-Research-Journal----What-We-Did-and-What-We-Got-Wrong">The Research Journal -- What We Did and What We Got Wrong<a class="anchor-link" href="#The-Research-Journal----What-We-Did-and-What-We-Got-Wrong">¶</a></h2><p>By my count, this pipeline was rebuilt approximately five times. Each rebuild
 was necessary. Each produced a better result. Here is the honest account.</p>
 <p><strong>Iteration 1: The original pipeline</strong>
 Sections 1-15 of the original 005_backtest. Clean architecture, sound hypothesis,
@@ -8160,10 +8160,10 @@ characterization, correlation mapping, formal tradability filter. The ADA/XRP
 bear regime signal initially found zero qualifying trades because DRAGON dates
 were excluded from the BEAR set -- fixed by expanding the filter. The tradability
 filter rewritten with clean helper functions.</p>
-<p><strong>What we would do differently:</strong>
+<p><strong>What I would do differently:</strong>
 Define the regime classifier before building any strategy. Run clean from scratch
 earlier. State execution constraints upfront. Version the notebooks from the start.</p>
-<p><strong>What we got right:</strong>
+<p><strong>What I got right:</strong>
 Honest reporting throughout. The pipeline architecture. Statistical validation.
 The regime insight. The ADSR framing. Knowing when to call something context
 rather than strategy.</p>
@@ -8187,17 +8187,17 @@ rather than strategy.</p>
 <li>Live paper trading with small sizing to validate out-of-sample</li>
 </ol>
 <hr/>
-<h2 id="Conclusion">Conclusion<a class="anchor-link" href="#Conclusion">¶</a></h2><p>We set out to find a lead-lag trading signal in cryptocurrency markets.</p>
-<p>We found one. It is real, statistically significant, and passes walk-forward
+<h2 id="Conclusion">Conclusion<a class="anchor-link" href="#Conclusion">¶</a></h2><p>I set out to find a lead-lag trading signal in cryptocurrency markets.</p>
+<p>I found one. It is real, statistically significant, and passes walk-forward
 validation. It requires institutional execution infrastructure. Its edge is
 decaying as the market matures. All of that is stated clearly and honestly.</p>
-<p>We also found that regime is primary. The same signal that works in a bull
+<p>I also found that regime is primary. The same signal that works in a bull
 market actively fails in a bear market. Testing without regime awareness
 produces misleading results. This insight -- which emerged from the data,
 not from a prior assumption -- is the most durable contribution of this research.</p>
-<p>We found three signals that pass the formal tradability filter. We documented
-three that do not. We documented the anti-patterns so others do not repeat
-our mistakes. We rebuilt the pipeline five times and documented why each time.</p>
+<p>I found three signals that pass the formal tradability filter. I documented
+three that do not. I documented the anti-patterns so others do not repeat
+my mistakes. I rebuilt the pipeline five times and documented why each time.</p>
 <p>The framework -- segmentation, classification, ADSR characterization, tradability
 filtering -- is extensible, honest, and replicable. It works on this dataset.
 It will work on the next one.</p>
