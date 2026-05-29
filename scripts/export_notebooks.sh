@@ -4,7 +4,7 @@
 # Run from the project root directory.
 # Uses the Python 3.13 Store installation explicitly to avoid Python 3.14 conflicts.
  
-NBCONVERT="/c/Users/wayne/AppData/Local/Packages/PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0/LocalCache/local-packages/Python313/Scripts/jupyter-nbconvert"
+NBCONVERT="PATH_TO_PYTHON_NBCONVERT"
  
 echo "Wall Street Quants -- Notebook Export"
 echo "======================================"
